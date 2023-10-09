@@ -1,4 +1,4 @@
-package booksearch.model.user;
+package booksearch.model.entities.user;
 
 import lombok.Data;
 
@@ -8,6 +8,5 @@ public class User {
     private Long id;
     private String username;
     private String email;
-    private String
-
+    private String bio;
 }
