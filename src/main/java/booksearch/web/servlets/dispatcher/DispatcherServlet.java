@@ -24,7 +24,7 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
         Optional<HttpRequestHandler> handler = findHandler(request);
         if(handler.isPresent()){
             handler.get().doGet(request,response);
