@@ -9,7 +9,31 @@
     <servlet-name>dispatcherServlet</servlet-name>
     <servlet-class>booksearch.web.servlets.dispatcher.DispatcherServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>booksearch.web.servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>registrationServlet</servlet-name>
+    <servlet-class>booksearch.web.servlets.RegistrationServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>logoutServlet</servlet-name>
+    <servlet-class>booksearch.web.servlets.LogoutServlet</servlet-class>
+  </servlet>
 
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/login/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>registrationServlet</servlet-name>
+    <url-pattern>/register/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>logoutServlet</servlet-name>
+    <url-pattern>/logout/</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/*</url-pattern>

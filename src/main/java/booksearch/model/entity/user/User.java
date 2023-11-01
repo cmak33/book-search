@@ -1,6 +1,6 @@
-package booksearch.model.user;
+package booksearch.model.entity.user;
 
-import booksearch.model.entity.Entity;
+import booksearch.model.entity.interfaces.Entity;
 import lombok.Data;
 
 @Data

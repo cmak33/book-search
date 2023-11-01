@@ -1,7 +1,7 @@
 package booksearch.service.user.interfaces;
 
 import booksearch.exception.entity.EntityNotFoundException;
-import booksearch.model.user.User;
+import booksearch.model.entity.user.User;
 
 public interface UserRepositoryService {
 

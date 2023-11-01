@@ -1,4 +1,4 @@
-package booksearch.model.entity;
+package booksearch.model.entity.interfaces;
 
 public interface Entity<T> {
 

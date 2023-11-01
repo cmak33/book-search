@@ -1,7 +1,7 @@
 package booksearch.service.user.interfaces;
 
 import booksearch.model.attributesholder.interfaces.AttributesHolder;
-import booksearch.model.user.User;
+import booksearch.model.entity.user.User;
 
 public interface UserLoginService {
 

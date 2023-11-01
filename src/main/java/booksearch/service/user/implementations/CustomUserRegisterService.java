@@ -2,7 +2,7 @@ package booksearch.service.user.implementations;
 
 import booksearch.dao.interfaces.UserDao;
 import booksearch.model.encoder.interfaces.Encoder;
-import booksearch.model.user.User;
+import booksearch.model.entity.user.User;
 import booksearch.service.user.interfaces.UserRegisterService;
 import lombok.RequiredArgsConstructor;
 

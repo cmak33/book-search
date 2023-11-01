@@ -2,7 +2,7 @@ package booksearch.service.user.implementations;
 
 import booksearch.dao.interfaces.UserDao;
 import booksearch.exception.entity.EntityNotFoundException;
-import booksearch.model.user.User;
+import booksearch.model.entity.user.User;
 import booksearch.service.user.interfaces.UserRepositoryService;
 import lombok.RequiredArgsConstructor;
 
