@@ -1,0 +1,41 @@
+package booksearch.web.filters;
+
+import booksearch.model.attributesholder.implementation.HttpSessionAttributesHolder;
+import booksearch.service.factory.service.ServiceFactory;
+import booksearch.service.user.interfaces.UserLoginService;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+
+import java.io.IOException;
+import java.util.List;
+
+@RequiredArgsConstructor
+public class AuthenticationFilter implements Filter {
+
+    private final UserLoginService userLoginService = ServiceFactory.getUserLoginService();
+    private List<String> urlsWithoutRequiredAuthentication;
+
+
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        Filter.super.init(filterConfig);
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        if(urlsWithoutRequiredAuthentication.stream().anyMatch(x->httpServletRequest.getRequestURI().startsWith(x)) || userLoginService.isUserLogged(new HttpSessionAttributesHolder(httpServletRequest.getSession()))){
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else{
+            ((HttpServletResponse)servletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        }
+    }
+}

@@ -1,0 +1,23 @@
+package booksearch.service.sql.interfaces;
+
+import booksearch.model.entity.interfaces.Entity;
+
+import javax.xml.transform.Result;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.function.Consumer;
+
+public interface EntitySqlExecutor {
+
+    void update(String table, Entity<?> obj) throws SQLException;
+
+    void insert(String table, Entity<?> obj) throws SQLException;
+
+    void select(String table, String id, Consumer<ResultSet> resultSetConsumer) throws SQLException;
+
+    void select(String table, Collection<String> columns, Collection<String> values, Consumer<ResultSet> resultSetConsumer) throws SQLException;
+
+    void delete(String table, Object id) throws SQLException;
+
+}

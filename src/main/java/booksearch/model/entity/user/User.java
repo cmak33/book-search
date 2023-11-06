@@ -12,6 +12,7 @@ public class User implements Entity<Long> {
     private String email;
     private String bio;
     private Role role;
+    private Status status;
 
     @Override
     public Long getId(){
