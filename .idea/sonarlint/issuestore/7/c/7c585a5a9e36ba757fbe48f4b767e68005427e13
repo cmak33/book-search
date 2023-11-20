@@ -1,7 +1,13 @@
 
 K
-java:S1948".Make "movieService" transient or serializable.(Í”ŸÂ8•“îÇ¾1
+java:S1948".Make "movieService" transient or serializable.(Í”ŸÂ8­îİİ¾1
 M
-java:S1948"0Make "commentService" transient or serializable.(ƒ½‘8•“îÇ¾1
+java:S1948"0Make "commentService" transient or serializable.(ƒ½‘8®îİİ¾1
 O
-java:S1948"2Make "userLoginService" transient or serializable.(•Ç‡¿8•“îÇ¾1
+java:S1948"2Make "userLoginService" transient or serializable.(•Ç‡¿8®îİİ¾1
+|
+java:S1128"ZRemove this unused import 'booksearch.model.attributesholder.interfaces.AttributesHolder'.(µØ¤¯úÿÿÿÿ8ãîİİ¾1
+f
+java:S1128"DRemove this unused import 'booksearch.model.entity.comment.Comment'.(ˆº‹±øÿÿÿÿ8äîİİ¾1
+[
+java:S1128">Remove this unused import 'booksearch.service.utility.Parser'.(€şéÙ8äîİİ¾1

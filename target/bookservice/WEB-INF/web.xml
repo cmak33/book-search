@@ -8,15 +8,15 @@
 
   <servlet>
     <servlet-name>loginServlet</servlet-name>
-    <servlet-class>booksearch.web.servlets.LoginServlet</servlet-class>
+    <servlet-class>booksearch.web.servlets.authentication.LoginServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>registrationServlet</servlet-name>
-    <servlet-class>booksearch.web.servlets.RegistrationServlet</servlet-class>
+    <servlet-class>booksearch.web.servlets.authentication.RegistrationServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>logoutServlet</servlet-name>
-    <servlet-class>booksearch.web.servlets.LogoutServlet</servlet-class>
+    <servlet-class>booksearch.web.servlets.authentication.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>movieServlet</servlet-name>

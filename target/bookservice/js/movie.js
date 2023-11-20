@@ -14,7 +14,9 @@ $(document).ready(function() {
     var parameters = getUrlParameters(window);
     var page = parameters["page"];
     page = page == null ? 1 : parseInt(page);
-    document.getElementById("query").value = parameters["query"];
+    if(parameters["query"]!=null) {
+        document.getElementById("query").value = parameters["query"];
+    }
     document.getElementById("next").addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent form submission
 

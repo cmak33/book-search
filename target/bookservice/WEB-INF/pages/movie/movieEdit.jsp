@@ -28,6 +28,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
+    <a href="${pageContext.servletContext.contextPath}/movie/${movie.getId()}"  class="btn btn-primary">Back to movie</a>
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package booksearch.web.servlets;
+package booksearch.web.servlets.authentication;
 
 import booksearch.model.attributesholder.implementation.HttpSessionAttributesHolder;
 import booksearch.model.attributesholder.interfaces.AttributesHolder;

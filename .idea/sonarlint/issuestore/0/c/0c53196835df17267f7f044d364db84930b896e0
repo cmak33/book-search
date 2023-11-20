@@ -1,3 +1,7 @@
 
 K
-java:S1948".Make "movieService" transient or serializable.(Í”ŸÂ8¼ÓğÇ¾1
+java:S1948".Make "movieService" transient or serializable.(Í”ŸÂ8µğİİ¾1
+[
+java:S1128">Remove this unused import 'booksearch.service.utility.Parser'.(€şéÙ8Íğİİ¾1
+N
+java:S1128"1Remove this unused import 'java.text.DateFormat'.(÷Œá¼8Íğİİ¾1
