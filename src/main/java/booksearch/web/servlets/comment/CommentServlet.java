@@ -1,6 +1,5 @@
 package booksearch.web.servlets.comment;
 
-import booksearch.dao.interfaces.CommentDao;
 import booksearch.model.attributesholder.implementation.HttpSessionAttributesHolder;
 import booksearch.model.entity.comment.Comment;
 import booksearch.service.comment.interfaces.CommentService;
@@ -29,6 +28,6 @@ public class CommentServlet extends HttpServlet {
         comment.setMessage(req.getParameter("message"));
         comment.setMovieId(Long.parseLong(req.getParameter("movieId")));
         commentService.saveCurrentUserComment(comment,new HttpSessionAttributesHolder(req.getSession()));
-        resp.sendRedirect(req.getRequestURL().toString());
+        resp.sendRedirect(req.getHeader("referer"));
     }
 }

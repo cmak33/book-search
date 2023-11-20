@@ -2,6 +2,8 @@ package booksearch.service.user.implementations;
 
 import booksearch.dao.interfaces.UserDao;
 import booksearch.model.encoder.interfaces.Encoder;
+import booksearch.model.entity.user.Role;
+import booksearch.model.entity.user.Status;
 import booksearch.model.entity.user.User;
 import booksearch.service.factory.auxiliary.AuxiliaryFactory;
 import booksearch.service.factory.dao.DaoFactory;
@@ -10,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 
 public class CustomUserRegisterService implements UserRegisterService {
 
-    private final UserDao userDao;
-    private final Encoder encoder;
+    private UserDao userDao;
+    private Encoder encoder;
 
     private CustomUserRegisterService() {
         userDao = DaoFactory.getUserDao();
@@ -36,6 +38,8 @@ public class CustomUserRegisterService implements UserRegisterService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(encoder.encode(password));
+        user.setRole(Role.USER);
+        user.setStatus(Status.UNBLOCKED);
         userDao.save(user);
     }
 }

@@ -10,7 +10,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 public class MovieCreationServlet extends HttpServlet {
@@ -33,7 +35,7 @@ public class MovieCreationServlet extends HttpServlet {
         String title = req.getParameter("title");
         String description = req.getParameter("description");
         String imageUrl = req.getParameter("imageUrl");
-        Date releaseDate = new Date(req.getParameter("releaseDate"));
+        Date releaseDate = Date.valueOf(req.getParameter("releaseDate"));
         Movie movie = new Movie();
         movie.setDescription(description);
         movie.setTitle(title);

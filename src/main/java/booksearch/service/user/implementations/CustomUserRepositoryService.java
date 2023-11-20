@@ -8,6 +8,10 @@ import booksearch.service.factory.dao.DaoFactory;
 import booksearch.service.user.interfaces.UserRepositoryService;
 import lombok.RequiredArgsConstructor;
 
+import javax.swing.text.html.Option;
+import java.util.List;
+import java.util.Optional;
+
 public class CustomUserRepositoryService implements UserRepositoryService {
 
     private final UserDao userDao;
@@ -16,18 +20,17 @@ public class CustomUserRepositoryService implements UserRepositoryService {
         userDao = DaoFactory.getUserDao();
     }
 
-    public static CustomUserRepositoryService getInstance() {
-        return Holder.INSTANCE;
-    }
-
     private static class Holder {
         private static final CustomUserRepositoryService INSTANCE = new CustomUserRepositoryService();
     }
 
+    public static CustomUserRepositoryService getInstance() {
+        return Holder.INSTANCE;
+    }
+
     @Override
-    public User findById(Long id) {
-        return userDao.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException(id));
+    public Optional<User> findById(Long id) {
+        return userDao.findById(id);
     }
 
     @Override
@@ -38,5 +41,15 @@ public class CustomUserRepositoryService implements UserRepositoryService {
     @Override
     public void deleteById(Long id) {
         userDao.deleteById(id);
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userDao.findAll();
     }
 }

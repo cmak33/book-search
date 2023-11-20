@@ -1,0 +1,14 @@
+
+µ
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ŽØÉ
+8Áãó²º1
+c
+java:S18544"ARemove this useless assignment to local variable "columnsString".(ü…¯¹ûÿÿÿÿ8§Ü€³º1
+T
+java:S14814"2Remove this unused "columnsString" local variable.(ü…¯¹ûÿÿÿÿ8§Ü€³º1
+c
+java:S1854<"ARemove this useless assignment to local variable "columnsString".(ü…¯¹ûÿÿÿÿ8¼¹¤Ó¼1
+T
+java:S1481<"2Remove this unused "columnsString" local variable.(ü…¯¹ûÿÿÿÿ8¼¹¤Ó¼1
+]
+java:S1128";Remove this unused import 'lombok.RequiredArgsConstructor'.(ÑØŽúøÿÿÿÿ8ª¥Ó¼1

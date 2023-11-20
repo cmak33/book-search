@@ -1,0 +1,6 @@
+
+»
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(Ú³©ïşÿÿÿÿ8£Âè®º1
+E	java:S108=")Either remove or fill this block of code.(•ÕÑÌ8Šíï®º1
+}
+java:S1128"[Remove this unused import 'booksearch.service.sql.implementations.CustomEntitySqlExecutor'.(ÃéÜşÿÿÿÿ8µñÔ¾1

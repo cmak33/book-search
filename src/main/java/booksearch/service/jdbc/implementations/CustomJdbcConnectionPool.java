@@ -1,6 +1,7 @@
 package booksearch.service.jdbc.implementations;
 
 import booksearch.model.jdbc.JdbcConnectionPoolInfo;
+import booksearch.service.configuration_reader.ConfigurationReader;
 import booksearch.service.jdbc.interfaces.JdbcConnectionPool;
 import booksearch.service.sql.implementations.CustomEntitySqlExecutor;
 
@@ -13,11 +14,18 @@ import java.util.List;
 public class CustomJdbcConnectionPool implements JdbcConnectionPool {
 
     private final List<Connection> availableConnections;
+    private final JdbcConnectionPoolInfo info;
 
     private CustomJdbcConnectionPool() {
+        info = ConfigurationReader.readConnectionPoolInfo();
         availableConnections = new ArrayList<>();
-        //JdbcConnectionPoolInfo
-        initializeConnections(info);
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            initializeConnections(info);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static CustomJdbcConnectionPool getInstance() {
@@ -31,21 +39,26 @@ public class CustomJdbcConnectionPool implements JdbcConnectionPool {
 
     private void initializeConnections(JdbcConnectionPoolInfo info) throws SQLException {
         for (int count = 0; count < info.initialConnections(); count++) {
-            DriverManager.getConnection(info.url(), info.user(), info.password());
+            availableConnections.add(DriverManager.getConnection(info.url(), info.user(), info.password()));
         }
     }
 
     @Override
     public synchronized Connection getConnection() throws SQLException {
         if (availableConnections.isEmpty()) {
-            throw new SQLException("No available connections");
-        } else {
-            return availableConnections.remove(availableConnections.size() - 1);
+            availableConnections.add(DriverManager.getConnection(info.url(), info.user(), info.password()));
         }
+        return availableConnections.remove(availableConnections.size() - 1);
     }
 
     @Override
     public synchronized void releaseConnection(Connection connection) {
-        availableConnections.add(connection);
+        if(info.initialConnections() < availableConnections.size()){
+            availableConnections.add(connection);
+        } else{
+            try {
+                connection.close();
+            } catch (SQLException sqlException){}
+        }
     }
 }

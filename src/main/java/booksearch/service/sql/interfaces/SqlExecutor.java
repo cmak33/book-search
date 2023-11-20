@@ -16,6 +16,8 @@ public interface SqlExecutor {
 
     void select(String table, Collection<String> columns, Collection<String> values, Consumer<ResultSet> resultSetConsumer) throws SQLException;
 
+    void select(String table, Collection<String> columns, Collection<String> values,int limit, int offset, Consumer<ResultSet> resultSetConsumer) throws SQLException;
+
     void delete(String table, Collection<String> columns, Collection<String> values) throws SQLException;
 
     void executeNonReturn(String sql) throws SQLException;

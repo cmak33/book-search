@@ -5,18 +5,21 @@ import booksearch.dao.interfaces.UserDao;
 import booksearch.exception.authentication.UserNotLoggedException;
 import booksearch.model.attributesholder.interfaces.AttributesHolder;
 import booksearch.model.encoder.interfaces.Encoder;
+import booksearch.model.entity.user.Role;
 import booksearch.model.entity.user.Status;
 import booksearch.model.entity.user.User;
 import booksearch.service.factory.auxiliary.AuxiliaryFactory;
 import booksearch.service.factory.dao.DaoFactory;
 import booksearch.service.user.interfaces.UserLoginService;
+import lombok.extern.java.Log;
 
 import java.util.Optional;
 
+@Log
 public class CustomUserLoginService implements UserLoginService {
 
-    private final UserDao userDao;
-    private final Encoder encoder;
+    private UserDao userDao;
+    private Encoder encoder;
 
     private CustomUserLoginService() {
         userDao = DaoFactory.getUserDao();
@@ -40,6 +43,7 @@ public class CustomUserLoginService implements UserLoginService {
     public User receiveLoggedUser(AttributesHolder attributesHolder) throws UserNotLoggedException {
         User user = (User) attributesHolder.getAttribute(SessionAttributeNames.USER_ATTRIBUTE_NAME);
         if (user == null) {
+            log.severe("User is not logged");
             throw new UserNotLoggedException();
         }
         return user;
@@ -53,13 +57,20 @@ public class CustomUserLoginService implements UserLoginService {
     }
 
     @Override
-    public boolean login(String username, String password, AttributesHolder attributesHolder) {
+    public LoginResult login(String username, String password, AttributesHolder attributesHolder) {
         Optional<User> user = userDao.findByUsername(username);
-        if (user.isEmpty() || user.get().getStatus().equals(Status.BLOCKED)) {
-            return false;
+        if (user.isEmpty() || !isPasswordCorrect(user.get(),password)) {
+            return LoginResult.WRONG_USERNAME_OR_PASSWORD;
+        } else if(user.get().getStatus().equals(Status.BLOCKED)){
+            return LoginResult.USER_IS_BLOCKED;
         }
-        attributesHolder.setAttribute(SessionAttributeNames.USER_ATTRIBUTE_NAME, username);
-        return true;
+        attributesHolder.setAttribute(SessionAttributeNames.USER_ATTRIBUTE_NAME, user.get());
+        attributesHolder.setAttribute(SessionAttributeNames.IS_USER_ADMIN_ATTRIBUTE_NAME,user.get().getRole().equals(Role.ADMIN));
+        return LoginResult.SUCCESS;
+    }
+
+    private boolean isPasswordCorrect(User user,String password){
+        return encoder.encode(password).equals(user.getPassword());
     }
 
     @Override

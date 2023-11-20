@@ -5,14 +5,20 @@ import booksearch.model.entity.interfaces.Entity;
 import booksearch.service.sql.interfaces.EntitySqlExecutor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 @Getter
 @RequiredArgsConstructor
+@Log
 public abstract class DefaultGenericDao<I,E extends Entity<I>> implements GenericDao<I,E> {
 
     private final EntitySqlExecutor entitySqlExecutor;
@@ -41,7 +47,7 @@ public abstract class DefaultGenericDao<I,E extends Entity<I>> implements Generi
         try {
             entitySqlExecutor.update(table, entity);
         } catch (SQLException e){
-
+            log.warning(e.getMessage());
         }
     }
 
@@ -50,8 +56,27 @@ public abstract class DefaultGenericDao<I,E extends Entity<I>> implements Generi
         try {
             entitySqlExecutor.insert(table, entity);
         } catch (SQLException e){
-
+            log.warning(e.getMessage());
         }
+    }
+
+    @Override
+    public List<E> findAll(int limit, int offset) {
+        List<E> result = new ArrayList<>();
+        String sql = String.format("SELECT * FROM %s LIMIT %d OFFSET %d",table,limit,offset);
+        Consumer<ResultSet> consumer = (resultSet)->{
+            Optional<E> entity = createEntity(resultSet);
+            while(entity.isPresent()){
+                result.add(entity.get());
+                entity = createEntity(resultSet);
+            }
+        };
+        try {
+            entitySqlExecutor.executeSql(sql, consumer);
+        } catch (SQLException e){
+            log.warning(e.getMessage());
+        }
+        return result;
     }
 
     @Override
@@ -59,7 +84,7 @@ public abstract class DefaultGenericDao<I,E extends Entity<I>> implements Generi
         try {
             entitySqlExecutor.delete(table, id);
         } catch (SQLException e){
-
+            log.warning(e.getMessage());
         }
     }
 }

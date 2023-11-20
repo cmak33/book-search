@@ -1,0 +1,9 @@
+
+Y
+java:S1948"7Make "userRepositoryService" transient or serializable.(½ó¢Öøÿÿÿÿ8ÿÚ–Ö»1
+†
+java:S1128"iRemove this unused import 'booksearch.model.attributesholder.implementation.HttpSessionAttributesHolder'.(ëµÙ8¾Ä´ó»1
+[
+java:S1128">Remove this unused import 'booksearch.model.entity.user.User'.(þûØ®8¾Ä´ó»1
+r
+java:S1128"PRemove this unused import 'booksearch.service.user.interfaces.UserLoginService'.(ÆË¤Žøÿÿÿÿ8¾Ä´ó»1

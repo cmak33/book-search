@@ -3,6 +3,7 @@ package booksearch.service.comment.implementations;
 import booksearch.dao.interfaces.CommentDao;
 import booksearch.model.attributesholder.interfaces.AttributesHolder;
 import booksearch.model.entity.comment.Comment;
+import booksearch.model.entity.movie.Movie;
 import booksearch.service.comment.interfaces.CommentService;
 import booksearch.service.factory.dao.DaoFactory;
 import booksearch.service.factory.service.ServiceFactory;
@@ -10,6 +11,7 @@ import booksearch.service.movie.implementations.CustomMovieService;
 import booksearch.service.user.interfaces.UserLoginService;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,8 +44,18 @@ public class CustomCommentService implements CommentService {
     }
 
     @Override
-    public List<Comment> findAllCommentsForMovie(Long movieId) {
-        return null;
+    public List<Comment> findAllCommentsForMovie(Long id) {
+        return commentDao.findByMovieId(id);
+    }
+
+    @Override
+    public List<Comment> findCommentsForMovie(Long movieId, int limit, int offset) {
+        return commentDao.findByMovieId(movieId,limit,offset);
+    }
+
+    @Override
+    public List<Comment> findAll(int limit, int offset) {
+        return commentDao.findAll(limit,offset);
     }
 
     @Override
@@ -54,6 +66,6 @@ public class CustomCommentService implements CommentService {
 
     @Override
     public void update(Comment comment) {
-        commentDao.save(comment);
+        commentDao.update(comment);
     }
 }

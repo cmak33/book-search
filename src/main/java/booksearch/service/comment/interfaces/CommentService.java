@@ -14,6 +14,10 @@ public interface CommentService {
 
     List<Comment> findAllCommentsForMovie(Long movieId);
 
+    List<Comment> findCommentsForMovie(Long movieId, int limit, int offset);
+
+    List<Comment> findAll(int limit, int offset);
+
     void saveCurrentUserComment(Comment comment, AttributesHolder attributesHolder);
 
     void update(Comment comment);

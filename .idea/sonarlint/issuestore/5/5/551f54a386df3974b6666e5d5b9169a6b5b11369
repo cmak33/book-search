@@ -1,0 +1,10 @@
+
+K
+java:S1948".Make "movieService" transient or serializable.(Í”ŸÂ8¤³¿Ô¼1
+_
+java:S1128
+"BRemove this unused import 'jakarta.servlet.annotation.WebServlet'.(½¢¢¸8µº°”½1
+G
+java:S1128"*Remove this unused import 'java.sql.Date'.(ÙÀ½Ê8µº°”½1
+Q
+java:S1128"/Remove this unused import 'java.util.Optional'.(¨˜ëÝüÿÿÿÿ8µº°”½1

@@ -1,0 +1,9 @@
+
+K
+java:S1948".Make "movieService" transient or serializable.(Í”ŸÂ8ëÍÌ´º1
+R
+java:S1128"5Remove this unused import 'java.text.ParseException'.(ñ®ï•8ÃÄ¹Ó»1
+T
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8´·ğÓ»1
+Q
+java:S1128"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ô’¹Ó»1

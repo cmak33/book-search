@@ -14,5 +14,9 @@ public interface MovieService {
 
     void update(Movie movie);
 
+    List<Movie> findByQuery(String query, int limit, int offset);
+
+    List<Movie> findAll(int limit, int offset);
+
     Optional<Movie> findById(Long id);
 }

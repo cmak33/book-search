@@ -61,4 +61,20 @@ public class CustomEntitySqlExecutor implements EntitySqlExecutor {
     public void delete(String table, Object id) throws SQLException {
         sqlExecutor.delete(table, List.of("id"),List.of(id.toString()));
     }
+
+    @Override
+    public void selectAll(String table, Consumer<ResultSet> resultSetConsumer) throws SQLException {
+        String sql = String.format("SELECT * FROM %s",table);
+        sqlExecutor.executeSql(sql,resultSetConsumer);
+    }
+
+    @Override
+    public void select(String table, Collection<String> columns, Collection<String> values, int limit, int offset, Consumer<ResultSet> resultSetConsumer) throws SQLException {
+        sqlExecutor.select(table,columns,values,limit,offset,resultSetConsumer);
+    }
+
+    @Override
+    public void executeSql(String sql, Consumer<ResultSet> resultSetConsumer) throws SQLException{
+        sqlExecutor.executeSql(sql,resultSetConsumer);
+    }
 }

@@ -3,12 +3,14 @@ package booksearch.web.servlets;
 import booksearch.model.attributesholder.implementation.HttpSessionAttributesHolder;
 import booksearch.model.attributesholder.interfaces.AttributesHolder;
 import booksearch.service.factory.service.ServiceFactory;
+import booksearch.service.user.implementations.LoginResult;
 import booksearch.service.user.interfaces.UserLoginService;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 
 import java.io.IOException;
 
@@ -29,12 +31,13 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(userLoginService.doesUserExist(request.getParameter("username"),request.getParameter("password"))){
-            AttributesHolder attributesHolder = new HttpSessionAttributesHolder(request.getSession());
-            userLoginService.login(request.getParameter("username"),request.getParameter("password"),attributesHolder);
-            response.sendRedirect("/movie");
+        AttributesHolder attributesHolder = new HttpSessionAttributesHolder(request.getSession());
+        LoginResult loginResult = userLoginService.login(request.getParameter("username"),request.getParameter("password"),attributesHolder);
+        if(loginResult.equals(LoginResult.SUCCESS)) {
+            response.sendRedirect(String.format("%s/profile",request.getContextPath()));
         } else{
-            request.setAttribute("errorMessage", "Wrong username or password");
+            String message = loginResult.equals(LoginResult.USER_IS_BLOCKED)?"User is blocked":"Wrong username or password";
+            request.setAttribute("errorMessage", message);
             doGet(request, response);
         }
     }

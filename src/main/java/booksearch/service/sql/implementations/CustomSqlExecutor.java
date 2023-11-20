@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -50,7 +51,15 @@ public class CustomSqlExecutor implements SqlExecutor {
     public void select(String table, Collection<String> columns, Collection<String> values, Consumer<ResultSet> resultSetConsumer) throws SQLException {
         String columnsString = String.join(",",columns);
         String whereQuery = createEqualsPartOfQuery(values,columns);
-        String sql = String.format("SELECT %s FROM %s WHERE %s",columnsString,table,whereQuery) ;
+        String sql = String.format("SELECT * FROM %s WHERE %s",table,whereQuery) ;
+        executeSql(sql,resultSetConsumer);
+    }
+
+    @Override
+    public void select(String table, Collection<String> columns, Collection<String> values, int limit, int offset, Consumer<ResultSet> resultSetConsumer) throws SQLException {
+        String columnsString = String.join(",",columns);
+        String whereQuery = createEqualsPartOfQuery(values,columns);
+        String sql = String.format("SELECT * FROM %s WHERE %s LIMIT %d OFFSET %d",table,whereQuery,limit,offset) ;
         executeSql(sql,resultSetConsumer);
     }
 
@@ -61,8 +70,11 @@ public class CustomSqlExecutor implements SqlExecutor {
         executeNonReturn(sql);
     }
 
+    //fix this please
     private String createEqualsPartOfQuery(Collection<String> values,Collection<String> columns){
-        List<String> comparedValues = IntStream.range(0,values.size()).mapToObj(index->String.format("%s = %s",columns,values)).toList();
+        List<String> valuesList = new ArrayList<>(values);
+        List<String> columnList = new ArrayList<>(columns);
+        List<String> comparedValues = IntStream.range(0,values.size()).mapToObj(index->String.format("%s = %s",columnList.get(index),valuesList.get(index))).toList();
         return String.join(",", comparedValues);
     }
 

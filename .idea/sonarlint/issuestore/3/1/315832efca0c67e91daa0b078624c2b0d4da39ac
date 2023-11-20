@@ -1,0 +1,11 @@
+
+µ
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(¡¢Û18Êï¶Ö»1
+r
+java:S1128"PRemove this unused import 'booksearch.exception.entity.EntityNotFoundException'.(Ø×ÔÛÿÿÿÿÿ8«ùáê¼1
+n
+java:S1128"RRemove this unused import 'booksearch.service.factory.auxiliary.AuxiliaryFactory'.(øˆ8«ùáê¼1
+]
+java:S1128	";Remove this unused import 'lombok.RequiredArgsConstructor'.(ÑØúøÿÿÿÿ8«ùáê¼1
+U
+java:S1128"9Remove this unused import 'javax.swing.text.html.Option'.(¼Òì:8»ùáê¼1

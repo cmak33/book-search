@@ -5,6 +5,7 @@ import booksearch.dao.interfaces.CommentDao;
 import booksearch.model.entity.comment.Comment;
 import booksearch.service.factory.sql.SqlObjectsFactory;
 import booksearch.service.sql.interfaces.EntitySqlExecutor;
+import lombok.extern.java.Log;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+@Log
 public class CustomCommentDao extends DefaultGenericDao<Long, Comment> implements CommentDao {
 
     private CustomCommentDao() {
@@ -39,13 +41,13 @@ public class CustomCommentDao extends DefaultGenericDao<Long, Comment> implement
                 return Optional.of(comment);
             }
         } catch (SQLException e){
-
+            log.warning(e.getMessage());
         }
         return Optional.empty();
     }
 
     @Override
-    public List<Comment> findByUserId(Object id) {
+    public List<Comment> findByMovieId(Long id) {
         List<Comment> result = new ArrayList<>();
         Consumer<ResultSet> consumer = (resultSet)->{
             Optional<Comment> comment = createEntity(resultSet);
@@ -55,9 +57,27 @@ public class CustomCommentDao extends DefaultGenericDao<Long, Comment> implement
             }
         };
         try {
-            getEntitySqlExecutor().select(getTable(), List.of("userId"), List.of(id.toString()), consumer);
+            getEntitySqlExecutor().select(getTable(), List.of("movieId"), List.of(id.toString()), consumer);
         } catch (SQLException sqlException){
+            log.warning(sqlException.getMessage());
+        }
+        return result;
+    }
 
+    @Override
+    public List<Comment> findByMovieId(Long id, int limit, int offset) {
+        List<Comment> result = new ArrayList<>();
+        Consumer<ResultSet> consumer = (resultSet)->{
+            Optional<Comment> comment = createEntity(resultSet);
+            while(comment.isPresent()){
+                result.add(comment.get());
+                comment = createEntity(resultSet);
+            }
+        };
+        try {
+            getEntitySqlExecutor().select(getTable(), List.of("movieId"), List.of(id.toString()), limit,offset,consumer);
+        } catch (SQLException sqlException){
+            log.warning(sqlException.getMessage());
         }
         return result;
     }

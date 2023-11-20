@@ -1,0 +1,12 @@
+
+¶
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(İ•ö¿8ğÎÜÀ¾1
+f
+java:S1128"DRemove this unused import 'booksearch.model.entity.comment.Comment'.(ˆº‹±øÿÿÿÿ8ÏÜÀ¾1
+n
+java:S1128"RRemove this unused import 'booksearch.service.factory.auxiliary.AuxiliaryFactory'.(øˆ8ÏÜÀ¾1
+x
+java:S1128	"[Remove this unused import 'booksearch.service.user.implementations.CustomUserLoginService'.(¡î¹•8ÏÜÀ¾1
+]
+java:S1128
+";Remove this unused import 'lombok.RequiredArgsConstructor'.(ÑØúøÿÿÿÿ8ÏÜÀ¾1

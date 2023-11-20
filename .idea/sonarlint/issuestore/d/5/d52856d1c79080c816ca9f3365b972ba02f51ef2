@@ -1,0 +1,11 @@
+
+o
+java:S1104:"RMake entity a static final constant or non-public and provide accessors if needed.(•ÊÆç8¬ÃÑÃ¾1
+¶
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ÊÃ’õ8ÑÃÑÃ¾1
+T
+java:S1611<"7Remove the parentheses around the "resultSet" parameter(­¹èþ8ÛÃÑÃ¾1
+I
+java:S1602<",Remove useless curly braces around statement(­¹èþ8áÃÑÃ¾1
+T
+java:S1611K"7Remove the parentheses around the "resultSet" parameter(­¹èþ8æÃÑÃ¾1

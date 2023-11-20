@@ -1,0 +1,12 @@
+
+¶
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(¡ûª8ÿ‚Îó¼1
+]
+java:S1128"@Remove this unused import 'booksearch.model.entity.movie.Movie'.(òûÖó8¬Ú½1
+u
+java:S1128
+"XRemove this unused import 'booksearch.service.movie.implementations.CustomMovieService'.(¼Ù“8¬Ú½1
+]
+java:S1128";Remove this unused import 'lombok.RequiredArgsConstructor'.(ÑØúøÿÿÿÿ8¬Ú½1
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8¬Ú½1

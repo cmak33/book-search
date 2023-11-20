@@ -17,11 +17,11 @@ public class ReflectionFieldValuesGetter {
                 field.setAccessible(true);
                 if (field.get(obj) != null) {
                     String value = field.get(obj).toString();
-                    if(field.getType().equals(String.class)){
+                    if(!field.getType().isPrimitive()){
                         value = String.format("'%s'",value);
                     }
+                    map.put(field.getName(), value);
                 }
-                map.put(field.getName(), field.get(obj).toString());
             } catch(IllegalAccessException illegalAccessException){}
         }
         return map;

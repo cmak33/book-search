@@ -2,23 +2,20 @@ package booksearch.dao.implementations;
 
 import booksearch.configuration.TableNamesConfiguration;
 import booksearch.dao.interfaces.UserDao;
-import booksearch.model.entity.movie.Movie;
 import booksearch.model.entity.user.Role;
 import booksearch.model.entity.user.Status;
 import booksearch.model.entity.user.User;
 import booksearch.service.factory.sql.SqlObjectsFactory;
-import booksearch.service.reflection.ReflectionFieldValuesGetter;
-import booksearch.service.sql.implementations.CustomEntitySqlExecutor;
-import booksearch.service.sql.interfaces.EntitySqlExecutor;
+import lombok.extern.java.Log;
 
-import javax.swing.text.TabableView;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+@Log
 public class CustomUserDao extends DefaultGenericDao<Long, User>  implements UserDao {
 
     private CustomUserDao() {
@@ -48,7 +45,7 @@ public class CustomUserDao extends DefaultGenericDao<Long, User>  implements Use
                 return Optional.of(user);
             }
         } catch (SQLException e){
-
+            log.warning(e.getMessage());
         }
 
         return Optional.empty();
@@ -56,6 +53,7 @@ public class CustomUserDao extends DefaultGenericDao<Long, User>  implements Use
 
     @Override
     public Optional<User> findByUsername(String username) {
+        username = String.format("'%s'",username);
         var obj = new Object(){
             public Optional<User> entity;
         };
@@ -66,7 +64,26 @@ public class CustomUserDao extends DefaultGenericDao<Long, User>  implements Use
             getEntitySqlExecutor().select(getTable(), List.of("username"),List.of(username),consumer);
         } catch (SQLException sqlException){
             obj.entity = Optional.empty();
+            log.warning(sqlException.getMessage());
         }
         return obj.entity;
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> result = new ArrayList<>();
+        Consumer<ResultSet> consumer = (resultSet)->{
+            Optional<User> user = createEntity(resultSet);
+            while(user.isPresent()){
+                result.add(user.get());
+                user = createEntity(resultSet);
+            }
+        };
+        try {
+            getEntitySqlExecutor().selectAll(getTable(),consumer);
+        } catch (SQLException sqlException){
+            log.warning(sqlException.getMessage());
+        }
+        return result;
     }
 }

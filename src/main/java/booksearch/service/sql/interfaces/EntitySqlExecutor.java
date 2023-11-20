@@ -20,4 +20,9 @@ public interface EntitySqlExecutor {
 
     void delete(String table, Object id) throws SQLException;
 
+    void selectAll(String table,Consumer<ResultSet> resultSetConsumer) throws  SQLException;
+
+    void select(String table, Collection<String> columns, Collection<String> values,int limit, int offset, Consumer<ResultSet> resultSetConsumer) throws SQLException;
+
+    void executeSql(String sql, Consumer<ResultSet> resultSetConsumer) throws SQLException;
 }

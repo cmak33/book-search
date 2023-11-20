@@ -38,9 +38,10 @@ public class RegistrationServlet extends HttpServlet {
             AttributesHolder attributesHolder = new HttpSessionAttributesHolder(request.getSession());
             userRegisterService.register(username, password);
             userLoginService.login(username, password,attributesHolder);
-            response.sendRedirect("/login");
+            response.sendRedirect(String.format("%s/login",request.getContextPath()));
         } else{
             request.setAttribute("errorMessage", "Username is not unique");
+            doGet(request,response);
         }
     }
 }

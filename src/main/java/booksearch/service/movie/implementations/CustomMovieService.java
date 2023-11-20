@@ -43,6 +43,16 @@ public class CustomMovieService implements MovieService {
         movieDao.update(movie);
     }
 
+    @Override
+    public List<Movie> findByQuery(String query, int limit, int offset) {
+        return movieDao.findByQuery(query,limit,offset);
+    }
+
+    @Override
+    public List<Movie> findAll(int limit, int offset) {
+        return movieDao.findAll(limit,offset);
+    }
+
 
     @Override
     public Optional<Movie> findById(Long id) {
